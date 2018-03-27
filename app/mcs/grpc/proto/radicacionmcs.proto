@@ -13,14 +13,14 @@ package radicacionmcs;
 
 service Greeter {
 
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
+  rpc FindAllRadicacion (gNricRequest) returns (gNricResponse) {}
 }
 
-message HelloRequest {
+message gNricRequest {
   string name = 1;
 }
 
 
-message HelloReply {
+message gNricResponse {
   string message = 1;
 }

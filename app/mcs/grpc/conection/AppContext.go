@@ -8,6 +8,10 @@ import (
 	pb "../proto"
 	"google.golang.org/grpc/reflection"
 	//"fmt"
+	"fmt"
+	"../../../../dao/factory"
+	"../../../../utilities"
+	"encoding/json"
 )
 
 const (
@@ -16,8 +20,24 @@ const (
 
 type server struct{}
 
-func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
+func (s *server) FindAllRadicacion(ctx context.Context, in *pb.GNricRequest) (*pb.GNricResponse, error) {
+	if len(in.Name) > 0  {
+		fmt.Print("se recibio un parametro "+in.Name)
+		return &pb.GNricResponse{Message: "" + in.Name}, nil
+	}
+	config, err := utilities.GetConfiguration()
+	if err != nil {
+		log.Fatal(err)
+		return nil,nil
+	}
+	radicacionDao := factory.FactoryDao(config.Engine)
+	radicaResult ,_ := radicacionDao.GetAll()
+	b, err := json.Marshal(radicaResult)
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+	return &pb.GNricResponse{Message: string(b)}, nil
 }
 
 func main() {

@@ -8,8 +8,8 @@ It is generated from these files:
 	app/mcs/grpc/proto/radicacionmcs.proto
 
 It has these top-level messages:
-	HelloRequest
-	HelloReply
+	GNricRequest
+	GNricResponse
 */
 package radicacionmcs
 
@@ -33,34 +33,32 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-// The request message containing the user's name.
-type HelloRequest struct {
+type GNricRequest struct {
 	Name string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 }
 
-func (m *HelloRequest) Reset()                    { *m = HelloRequest{} }
-func (m *HelloRequest) String() string            { return proto.CompactTextString(m) }
-func (*HelloRequest) ProtoMessage()               {}
-func (*HelloRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (m *GNricRequest) Reset()                    { *m = GNricRequest{} }
+func (m *GNricRequest) String() string            { return proto.CompactTextString(m) }
+func (*GNricRequest) ProtoMessage()               {}
+func (*GNricRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
-func (m *HelloRequest) GetName() string {
+func (m *GNricRequest) GetName() string {
 	if m != nil {
 		return m.Name
 	}
 	return ""
 }
 
-// The response message containing the greetings
-type HelloReply struct {
+type GNricResponse struct {
 	Message string `protobuf:"bytes,1,opt,name=message" json:"message,omitempty"`
 }
 
-func (m *HelloReply) Reset()                    { *m = HelloReply{} }
-func (m *HelloReply) String() string            { return proto.CompactTextString(m) }
-func (*HelloReply) ProtoMessage()               {}
-func (*HelloReply) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+func (m *GNricResponse) Reset()                    { *m = GNricResponse{} }
+func (m *GNricResponse) String() string            { return proto.CompactTextString(m) }
+func (*GNricResponse) ProtoMessage()               {}
+func (*GNricResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
 
-func (m *HelloReply) GetMessage() string {
+func (m *GNricResponse) GetMessage() string {
 	if m != nil {
 		return m.Message
 	}
@@ -68,8 +66,8 @@ func (m *HelloReply) GetMessage() string {
 }
 
 func init() {
-	proto.RegisterType((*HelloRequest)(nil), "radicacionmcs.HelloRequest")
-	proto.RegisterType((*HelloReply)(nil), "radicacionmcs.HelloReply")
+	proto.RegisterType((*GNricRequest)(nil), "radicacionmcs.gNricRequest")
+	proto.RegisterType((*GNricResponse)(nil), "radicacionmcs.gNricResponse")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -83,8 +81,7 @@ const _ = grpc.SupportPackageIsVersion4
 // Client API for Greeter service
 
 type GreeterClient interface {
-	// Sends a greeting
-	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error)
+	FindAllRadicacion(ctx context.Context, in *GNricRequest, opts ...grpc.CallOption) (*GNricResponse, error)
 }
 
 type greeterClient struct {
@@ -95,9 +92,9 @@ func NewGreeterClient(cc *grpc.ClientConn) GreeterClient {
 	return &greeterClient{cc}
 }
 
-func (c *greeterClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error) {
-	out := new(HelloReply)
-	err := grpc.Invoke(ctx, "/radicacionmcs.Greeter/SayHello", in, out, c.cc, opts...)
+func (c *greeterClient) FindAllRadicacion(ctx context.Context, in *GNricRequest, opts ...grpc.CallOption) (*GNricResponse, error) {
+	out := new(GNricResponse)
+	err := grpc.Invoke(ctx, "/radicacionmcs.Greeter/FindAllRadicacion", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -107,28 +104,27 @@ func (c *greeterClient) SayHello(ctx context.Context, in *HelloRequest, opts ...
 // Server API for Greeter service
 
 type GreeterServer interface {
-	// Sends a greeting
-	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
+	FindAllRadicacion(context.Context, *GNricRequest) (*GNricResponse, error)
 }
 
 func RegisterGreeterServer(s *grpc.Server, srv GreeterServer) {
 	s.RegisterService(&_Greeter_serviceDesc, srv)
 }
 
-func _Greeter_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HelloRequest)
+func _Greeter_FindAllRadicacion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GNricRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GreeterServer).SayHello(ctx, in)
+		return srv.(GreeterServer).FindAllRadicacion(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/radicacionmcs.Greeter/SayHello",
+		FullMethod: "/radicacionmcs.Greeter/FindAllRadicacion",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GreeterServer).SayHello(ctx, req.(*HelloRequest))
+		return srv.(GreeterServer).FindAllRadicacion(ctx, req.(*GNricRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -138,8 +134,8 @@ var _Greeter_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*GreeterServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SayHello",
-			Handler:    _Greeter_SayHello_Handler,
+			MethodName: "FindAllRadicacion",
+			Handler:    _Greeter_FindAllRadicacion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -149,17 +145,17 @@ var _Greeter_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("app/mcs/grpc/proto/radicacionmcs.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 182 bytes of a gzipped FileDescriptorProto
+	// 190 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0x4b, 0x2c, 0x28, 0xd0,
 	0xcf, 0x4d, 0x2e, 0xd6, 0x4f, 0x2f, 0x2a, 0x48, 0xd6, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0xd7, 0x2f,
 	0x4a, 0x4c, 0xc9, 0x4c, 0x4e, 0x4c, 0xce, 0xcc, 0xcf, 0xcb, 0x4d, 0x2e, 0xd6, 0x03, 0x8b, 0x09,
-	0xf1, 0xa2, 0x08, 0x2a, 0x29, 0x71, 0xf1, 0x78, 0xa4, 0xe6, 0xe4, 0xe4, 0x07, 0xa5, 0x16, 0x96,
+	0xf1, 0xa2, 0x08, 0x2a, 0x29, 0x71, 0xf1, 0xa4, 0xfb, 0x15, 0x65, 0x26, 0x07, 0xa5, 0x16, 0x96,
 	0xa6, 0x16, 0x97, 0x08, 0x09, 0x71, 0xb1, 0xe4, 0x25, 0xe6, 0xa6, 0x4a, 0x30, 0x2a, 0x30, 0x6a,
-	0x70, 0x06, 0x81, 0xd9, 0x4a, 0x6a, 0x5c, 0x5c, 0x50, 0x35, 0x05, 0x39, 0x95, 0x42, 0x12, 0x5c,
-	0xec, 0xb9, 0xa9, 0xc5, 0xc5, 0x89, 0xe9, 0x30, 0x45, 0x30, 0xae, 0x91, 0x3f, 0x17, 0xbb, 0x7b,
-	0x51, 0x6a, 0x6a, 0x49, 0x6a, 0x91, 0x90, 0x0b, 0x17, 0x47, 0x70, 0x62, 0x25, 0x58, 0x97, 0x90,
-	0xb4, 0x1e, 0xaa, 0x3b, 0x90, 0xed, 0x93, 0x92, 0xc4, 0x2e, 0x59, 0x90, 0x53, 0xa9, 0xc4, 0xe0,
-	0xa4, 0xca, 0x25, 0x94, 0x58, 0x50, 0xa0, 0x07, 0x12, 0x07, 0xf9, 0x0a, 0xe2, 0x03, 0x27, 0x54,
-	0x1f, 0x04, 0x30, 0x26, 0xb1, 0x81, 0xc5, 0x8d, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0xd6, 0xff,
-	0xf5, 0x20, 0x03, 0x01, 0x00, 0x00,
+	0x70, 0x06, 0x81, 0xd9, 0x4a, 0x9a, 0x5c, 0xbc, 0x50, 0x35, 0xc5, 0x05, 0xf9, 0x79, 0xc5, 0xa9,
+	0x42, 0x12, 0x5c, 0xec, 0xb9, 0xa9, 0xc5, 0xc5, 0x89, 0xe9, 0x30, 0x75, 0x30, 0xae, 0x51, 0x34,
+	0x17, 0xbb, 0x7b, 0x51, 0x6a, 0x6a, 0x49, 0x6a, 0x91, 0x50, 0x00, 0x97, 0xa0, 0x5b, 0x66, 0x5e,
+	0x8a, 0x63, 0x4e, 0x4e, 0x10, 0xdc, 0x46, 0x21, 0x69, 0x3d, 0x54, 0x37, 0x21, 0xdb, 0x2d, 0x25,
+	0x83, 0x5d, 0x12, 0x62, 0xa9, 0x12, 0x83, 0x93, 0x2a, 0x97, 0x50, 0x62, 0x41, 0x81, 0x1e, 0x58,
+	0xaa, 0xa8, 0x20, 0x19, 0xe2, 0x21, 0x27, 0x54, 0x0f, 0x05, 0x30, 0x26, 0xb1, 0x81, 0xc5, 0x8d,
+	0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x1a, 0x73, 0x0f, 0x9d, 0x12, 0x01, 0x00, 0x00,
 }
