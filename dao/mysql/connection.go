@@ -9,10 +9,15 @@ import (
 	"../../utilities"
 	"log"
 models "../../models"
+	//"sync"
+	//"fmt"
 )
 
-func get() *xorm.Engine {
-	var engine *xorm.Engine
+
+
+
+
+func getConection() *xorm.Engine {
 
 	config, err := utilities.GetConfiguration()
 	if err != nil {

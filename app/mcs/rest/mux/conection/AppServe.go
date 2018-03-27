@@ -15,6 +15,7 @@ func main() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/findAllRadicacion", end.GetAllRadicacionData).Methods("GET")
+	router.HandleFunc("/getCurrentRadicacion", end.GetCurrentRadicacionData).Methods("GET")
 	/*router.HandleFunc("/.../{id}", end....).Methods("GET")*/
 	log.Fatal(http.ListenAndServe(":8000", router))
 }

@@ -10,7 +10,7 @@ func FactoryDao(e string) interfaces.RadicacionDao {
 	var i interfaces.RadicacionDao
 	switch e {
 	case "mysql":
-		i = mysql.RadicacionImplMysql{}
+		i = mysql.MysqlImplDb{}
 	default:
 		log.Fatalf("El motor %s no esta implementado", e)
 		return nil
