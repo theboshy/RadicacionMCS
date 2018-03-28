@@ -1,5 +1,5 @@
 # RadicacionMCS
-implementacion de micorservicio con radicacion / grpc y rest end point (mux (github.com/gorilla/mux))
+Implementacion de servicio / api rest y microservicio grpc integrado al orm (xorm) { modulo radicacion } / grpc y rest end point
 
 Ejecucion de nuevo (o cambios agregados) agregados al protobuf
 
