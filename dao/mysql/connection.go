@@ -25,7 +25,7 @@ func getConection() *xorm.Engine {
 		return nil
 	}
 
-	engine, err = xorm.NewEngine("mysql", config.User+":"+config.Password+"@tcp("+config.Server+":"+config.Port+")/"+config.Database)
+	engine, err = xorm.NewEngine("mysql", config.User+":"+config.Password+"@tcp("+config.Server+":"+config.Port+")/"+config.Database+"?charset=utf8&parseTime=True")
 	engine.SetMapper(core.SameMapper{})
 	engine.Sync2(new(models.Radicacion))
 

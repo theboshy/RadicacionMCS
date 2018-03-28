@@ -5,21 +5,39 @@ import (
 	//"fmt"
 )
 
-func (dao MysqlImplDb) Create(radicaci *models.Radicacion) error {
+func (dao MysqlImplDb) Create(model models.Radicacion) (int64, error) {
+	db := getConection()
+	defer db.Close()
+	radci := model
+	affec,error :=db.Insert(&radci)
+	if error != nil {
+		return affec,error
+	}
+	return affec,nil
+}
 
-	return nil
+func (dao MysqlImplDb) Find(id string) (models.Radicacion, error) {
+	db := getConection()
+	defer db.Close()
+	radii := models.Radicacion{}
+	affect,error :=db.Where("numero_radicacion = ?", id).Get(&radii)
+	if error != nil || affect == false{
+		return radii,error
+	}
+	return radii,nil
 }
 
 func (dao MysqlImplDb) GetAll() ([]models.Radicacion, error) {
 	//query := "SELECT numero_radicacion FROM radicacion"
 	//radicEng := make([]models.Radicacion, 0)
-	db := GetInstance()
+	db := getConection()
 	defer db.Close()
-	var radci []models.Radicacion
-	error :=db.Find(&radci)
+	var radii []models.Radicacion
+	error :=db.Find(&radii)
 	if error != nil {
-		return radci,error
+		return radii,error
 	}
-		return radci,nil
+		return radii,nil
 }
+
 

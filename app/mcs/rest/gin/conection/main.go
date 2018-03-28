@@ -1,4 +1,4 @@
-package conection
+package main
 
 import (
 	"context"
@@ -13,6 +13,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"github.com/gin-contrib/cors"
 )
 
 const serverPort = ":8283"
@@ -25,6 +26,8 @@ func SetupRouter() *gin.Engine {
 
 func main() {
 	router := SetupRouter()
+	//-acors origin
+	router.Use(cors.Default())
 	serviceMapping.MapRouterGroup(router)
 	//router.Run(serverPort)
 

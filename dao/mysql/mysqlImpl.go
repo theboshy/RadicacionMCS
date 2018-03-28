@@ -2,14 +2,16 @@ package mysql
 
 import (
 	"github.com/go-xorm/xorm"
-	"sync"
-	"fmt"
+	/*"sync"
+	"fmt"*/
 )
 
 type MysqlImplDb struct {
 }
-
 var engine *xorm.Engine
+/*
+
+
 var once sync.Once
 
 func GetInstance() *xorm.Engine {
@@ -18,4 +20,4 @@ func GetInstance() *xorm.Engine {
 		engine = getConection()
 	})
 	return engine
-}
+}*/

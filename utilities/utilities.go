@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"../models"
 	"os"
+	"database/sql"
+	"strconv"
 )
 
 func GetConfiguration() (models.Configuration, error) {
@@ -20,4 +22,14 @@ func GetConfiguration() (models.Configuration, error) {
 	}
 
 	return config, nil
+}
+
+
+func ToNullInt64(s string) sql.NullInt64 {
+	if s == "0" {
+	    s ="null"
+	}
+	i, err := strconv.Atoi(s)
+
+	return sql.NullInt64{Int64 : int64(i), Valid : err == nil}
 }

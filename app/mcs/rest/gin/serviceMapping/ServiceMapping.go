@@ -12,6 +12,9 @@ func MapRouterGroup(router *gin.Engine) {
 		mappingsUrl.GET("/instructions", routers.GetInstructions)
 		mappingsUrl.GET("/delivery", routers.GetDelivery)
 		mappingsUrl.POST("/captureRecords", routers.PostConsoleParams)
+		mappingsUrl.GET("/findAllRadicacion", routers.FinAllRadicacion)
+		mappingsUrl.POST("/setNewRadicacion", routers.SetNewRadicacion)
+		mappingsUrl.GET("/findByIdRadicacion", routers.FindByIdRadicacion)
 	}
 
 	//segundo grupo de empaquetado (mappings para mcs/secondary)
