@@ -8,10 +8,10 @@ import (
 	"../../../../../models"
 	"../../../../../models/structfaces"
 	"log"
-	//"encoding/json"
-	//"strconv"
-	"time"
-	//"database/sql"
+
+
+
+	"github.com/gin-gonic/gin/binding"
 )
 
 func GetInstructions(c *gin.Context) {
@@ -48,7 +48,20 @@ func SetNewRadicacion(c *gin.Context) {
 		return
 	}
 
-	radicacion := models.Radicacion{}
+	/*var bodyBytes []byte
+
+	if c.Request.Body != nil {
+		bodyBytes, _ = ioutil.ReadAll(c.Request.Body)
+	}
+	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))*/
+
+	radicacion := new(models.Radicacion)
+	error := binding.JSON.Bind(c.Request,radicacion)
+
+
+
+
+	/*radicacion := models.Radicacion{}
 //	radicacion.NumeroRadicacion  = c.Query("NumeroRadicacion")
 	radicacion.NumeroRadicacion = c.PostForm("NumeroRadicacion")
 	radicacion.FechaRadicacion,_ = time.Parse(time.RFC3339,c.PostForm("FechaRadicacion"))
@@ -56,10 +69,10 @@ func SetNewRadicacion(c *gin.Context) {
 	radicacion.Asunto = c.PostForm("Asunto")
 	radicacion.IDRemitente = c.PostForm("IDRemitente")
 	radicacion.PdfIdPdf = utilities.ToNullInt64(c.PostForm("PdfIdPdf"))
-	radicacion.TiempoRespuesta,_ = time.Parse(time.RFC3339,c.PostForm("TiempoRespuesta"))
+	radicacion.TiempoRespuesta,_ = time.Parse(time.RFC3339,c.PostForm("TiempoRespuesta"))*/
 
 	radicacionDao := factory.FactoryDao(config.Engine)
-	affect ,error := radicacionDao.Create(radicacion);
+	affect ,error := radicacionDao.Create(*radicacion);
 	if error != nil || affect == 0{
 		response.Status = 500
 		response.Message ="insertion error in radicacion #"+radicacion.NumeroRadicacion+" &[SetNewRadicacion]"
