@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	address     = "localhost:50051"
+	address     = "localhost:66666"
 	defaultName = "client rpc"
 )
 

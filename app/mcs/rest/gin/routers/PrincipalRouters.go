@@ -7,11 +7,13 @@ import (
 	"../../../../../utilities"
 	"../../../../../models"
 	"../../../../../models/structfaces"
+
 	"log"
 
 
-
-	"github.com/gin-gonic/gin/binding"
+	//"database/sql"
+	"io/ioutil"
+	"bytes"
 )
 
 func GetInstructions(c *gin.Context) {
@@ -48,16 +50,16 @@ func SetNewRadicacion(c *gin.Context) {
 		return
 	}
 
-	/*var bodyBytes []byte
+	var bodyBytes []byte
 
 	if c.Request.Body != nil {
 		bodyBytes, _ = ioutil.ReadAll(c.Request.Body)
 	}
-	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))*/
+	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
 
 	radicacion := new(models.Radicacion)
-	error := binding.JSON.Bind(c.Request,radicacion)
-
+	error := c.Bind(radicacion)
+//error := binding.JSON.Bind(c.Request,radicacion)
 
 
 
@@ -101,3 +103,5 @@ func PostConsoleParams(c *gin.Context) {
 	message := c.PostForm("message")
 	fmt.Printf("id: %s; valor1: %s; name: %s; message: %s", id, valor1, name, message)
 }
+
+//---
