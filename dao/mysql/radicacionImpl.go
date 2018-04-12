@@ -5,7 +5,7 @@ import (
 	//"fmt"
 )
 
-func (dao MysqlImplDb) Create(model models.Radicacion) (int64, error) {
+func (dao MysqlImplDb) CreateRadicacion(model models.Radicacion) (int64, error) {
 	db := getConection()
 	defer db.Close()
 	radci := model
@@ -16,7 +16,7 @@ func (dao MysqlImplDb) Create(model models.Radicacion) (int64, error) {
 	return affec,nil
 }
 
-func (dao MysqlImplDb) Find(id string) (models.Radicacion, error) {
+func (dao MysqlImplDb) FindRadicacion(id string) (models.Radicacion, error) {
 	db := getConection()
 	defer db.Close()
 	radii := models.Radicacion{}
@@ -27,7 +27,7 @@ func (dao MysqlImplDb) Find(id string) (models.Radicacion, error) {
 	return radii,nil
 }
 
-func (dao MysqlImplDb) GetAll() ([]models.Radicacion, error) {
+func (dao MysqlImplDb) GetAllRadicacion() ([]models.Radicacion, error) {
 	//query := "SELECT numero_radicacion FROM radicacion"
 	//radicEng := make([]models.Radicacion, 0)
 	db := getConection()

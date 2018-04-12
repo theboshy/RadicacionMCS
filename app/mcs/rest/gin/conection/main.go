@@ -3,16 +3,14 @@ package main
 import (
 	"context"
 	"github.com/gin-gonic/gin"
-	//"fmt"
 	"net/http"
 	"time"
-	//"github.com/fvbock/endless"
-	//"log"
 	"../serviceMapping"
 	"fmt"
 	"log"
 	"os"
 	"os/signal"
+	//midle "../routers/midleware"
 	"github.com/gin-contrib/cors"
 )
 
@@ -26,10 +24,14 @@ func SetupRouter() *gin.Engine {
 
 func main() {
 	router := SetupRouter()
+
+	/*oauth - authMiddleware := midle.BuildMidleWare()*/
+
 	//-acors origin
 	router.Use(cors.Default())
-	serviceMapping.MapRouterGroup(router)
-	//router.Run(serverPort)
+
+	serviceMapping.MapRouterGroup(*router/*,authMiddleware*/)
+
 
 	srv := &http.Server{
 		Addr:    serverPort,
@@ -59,3 +61,6 @@ func main() {
 
 	//endless.ListenAndServe(":8956", router)
 }
+
+
+

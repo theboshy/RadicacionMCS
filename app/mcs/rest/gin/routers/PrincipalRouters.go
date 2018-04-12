@@ -26,8 +26,8 @@ func FinAllRadicacion(c *gin.Context) {
 		log.Fatal(err)
 		return
 	}
-	radicacionDao := factory.FactoryDao(config.Engine)
-	radicaResult ,_ := radicacionDao.GetAll()
+	radicacionDao := factory.FactoryDaoRadicacion(config.Engine)
+	radicaResult ,_ := radicacionDao.GetAllRadicacion()
 	c.JSON(200, radicaResult)
 }
 func FindByIdRadicacion(c *gin.Context) {
@@ -36,9 +36,9 @@ func FindByIdRadicacion(c *gin.Context) {
 		log.Fatal(err)
 		return
 	}
-	radicacionDao := factory.FactoryDao(config.Engine)
+	radicacionDao := factory.FactoryDaoRadicacion(config.Engine)
 //fmt.Println(c.Request.Body)
-	radicaResult ,_ := radicacionDao.Find(c.Query("idRadicacion"))
+	radicaResult ,_ := radicacionDao.FindRadicacion(c.Query("idRadicacion"))
 	c.JSON(200, radicaResult)
 }
 
@@ -73,8 +73,8 @@ func SetNewRadicacion(c *gin.Context) {
 	radicacion.PdfIdPdf = utilities.ToNullInt64(c.PostForm("PdfIdPdf"))
 	radicacion.TiempoRespuesta,_ = time.Parse(time.RFC3339,c.PostForm("TiempoRespuesta"))*/
 
-	radicacionDao := factory.FactoryDao(config.Engine)
-	affect ,error := radicacionDao.Create(*radicacion);
+	radicacionDao := factory.FactoryDaoRadicacion(config.Engine)
+	affect ,error := radicacionDao.CreateRadicacion(*radicacion);
 	if error != nil || affect == 0{
 		response.Status = 500
 		response.Message ="insertion error in radicacion #"+radicacion.NumeroRadicacion+" &[SetNewRadicacion]"

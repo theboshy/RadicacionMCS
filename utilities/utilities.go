@@ -6,6 +6,9 @@ import (
 	"os"
 	"database/sql"
 	"strconv"
+	//"os/exec"
+	"github.com/google/uuid"
+	"time"
 )
 
 func GetConfiguration() (models.Configuration, error) {
@@ -33,3 +36,17 @@ func ToNullInt64(s string) sql.NullInt64 {
 
 	return sql.NullInt64{Int64 : int64(i), Valid : err == nil}
 }
+
+func GetUUID() uuid.UUID {
+	uuid,err :=uuid.NewRandom()
+	if err != nil {
+		panic(err)
+	}
+	return uuid
+}
+
+func UnixNow() int64 {
+	now := time.Now()
+	return now.Unix()
+}
+

@@ -4,10 +4,12 @@ import (
 	"net/http"
 	"os"
 	"time"
-
 	"github.com/appleboy/gin-jwt"
 	"github.com/gin-gonic/gin"
+	"../../../../utilities"
 )
+
+const SECRECT_KEY  = "xnyAqBz3ERocwP1lxi12KUyx0zJ76zwxTicap3QWd59Hwyd19Tq3LIAMInCHkLq.775806DFA54B06C277CCF4D355F42F831D7D9226BB247B6A5163EE4A505AD0E1"
 
 func helloHandler(c *gin.Context) {
 	claims := jwt.ExtractClaims(c)
@@ -17,11 +19,13 @@ func helloHandler(c *gin.Context) {
 	})
 }
 
+
+
 func main() {
 	port := os.Getenv("PORT")
-	r := gin.New()
-	r.Use(gin.Logger())
-	r.Use(gin.Recovery())
+	r := gin.Default()
+	//r.Use(gin.Logger())
+	//r.Use(gin.Recovery())
 
 	if port == "" {
 		port = "8000"
@@ -29,23 +33,33 @@ func main() {
 
 	// the jwt middleware
 	authMiddleware := &jwt.GinJWTMiddleware{
-		Realm:      "test zone",
-		Key:        []byte("secret key"),
-		Timeout:    time.Hour,
+		Realm:      "strange bug",
+		Key:        []byte(SECRECT_KEY),
+		Timeout:    time.Hour*24,
 		MaxRefresh: time.Hour,
 		Authenticator: func(userId string, password string, c *gin.Context) (string, bool) {
+
 			if (userId == "admin" && password == "admin") || (userId == "test" && password == "test") {
-				return userId, true
+				return "1988267267", true
 			}
 
 			return userId, false
 		},
 		Authorizator: func(userId string, c *gin.Context) bool {
-			if userId == "admin" {
+			claims := jwt.ExtractClaims(c)
+			if claims["role"] == "admin" {
 				return true
 			}
-
 			return false
+		},
+		PayloadFunc: func(userID string) map[string]interface{} {
+				return map[string]interface{}{
+				"dependencia" : "algun cafe rancio",
+				"role": "admin",
+				//--reque / def
+				"iat" : utilities.UnixNow(),
+				"jti" : utilities.GetUUID(),
+			}
 		},
 		Unauthorized: func(c *gin.Context, code int, message string) {
 			c.JSON(code, gin.H{
@@ -53,21 +67,9 @@ func main() {
 				"message": message,
 			})
 		},
-		// TokenLookup is a string in the form of "<source>:<name>" that is used
-		// to extract token from the request.
-		// Optional. Default value "header:Authorization".
-		// Possible values:
-		// - "header:<name>"
-		// - "query:<name>"
-		// - "cookie:<name>"
 		TokenLookup: "header:Authorization",
-		// TokenLookup: "query:token",
-		// TokenLookup: "cookie:token",
+		TokenHeadName: "Bearer",//Bearer
 
-		// TokenHeadName is a string in the header. Default value is "Bearer"
-		TokenHeadName: "Bearer",
-
-		// TimeFunc provides the current time. You can override it to use another time value. This is useful for testing or if your server uses a different time zone than your tokens.
 		TimeFunc: time.Now,
 	}
 
