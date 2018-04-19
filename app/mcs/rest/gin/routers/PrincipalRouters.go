@@ -14,6 +14,7 @@ import (
 	//"database/sql"
 	"io/ioutil"
 	"bytes"
+	"net/http"
 )
 
 func GetInstructions(c *gin.Context) {
@@ -102,6 +103,20 @@ func PostConsoleParams(c *gin.Context) {
 	valor1 := c.PostForm("valor1")
 	message := c.PostForm("message")
 	fmt.Printf("id: %s; valor1: %s; name: %s; message: %s", id, valor1, name, message)
+}
+
+func CaptureFile(c *gin.Context)  {
+	var filePath = "C:/Users/Software1/Desktop/"
+	file, err := c.FormFile("file")
+	if err != nil {
+		c.String(http.StatusBadRequest, fmt.Sprintf("get form err: %s", err.Error()))
+		return
+	}
+	if err := c.SaveUploadedFile(file, "C:/Users/Software1/Desktop/"+file.Filename); err != nil {
+		c.String(http.StatusBadRequest, fmt.Sprintf("upload file err: %s", err.Error()))
+		return
+	}
+	c.String(http.StatusOK, fmt.Sprintf("File save in %s uploaded successfully ", filePath+file.Filename))
 }
 
 //---

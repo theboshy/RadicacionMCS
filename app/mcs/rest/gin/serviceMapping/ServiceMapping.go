@@ -14,8 +14,9 @@ func MapRouterGroup(router gin.Engine/*,authmidleware *jwt.GinJWTMiddleware*/) {
 	mappingsUrl := router.Group("mcs/principal")
 	{
 		mappingsUrl.GET("/instructions", routers.GetInstructions)
-		mappingsUrl.GET("/findALLUsuario", routers.FinAllUsuario)
 		mappingsUrl.GET("/findALLUsuarioExtend", routers.GetAlllExtends)
+		mappingsUrl.GET("/findALLUsuario", routers.FinAllUsuario)
+		mappingsUrl.POST("/captureFile", routers.CaptureFile)
 		//mappingsUrl.POST("/findByUsuario", routers.FindUsuario)
 		mappingsUrl.POST("/findBySede", routers.FindBySede)
 		mappingsUrl.GET("/delivery", routers.GetDelivery)
