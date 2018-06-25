@@ -15,5 +15,5 @@
 .glide/
 
 !./ignoredfolder/
-./ignoredfolder/
-!./ignoredfolder/notigno/
+./ignoredfolder/*
+!./ignoredfolder/notigno/*
