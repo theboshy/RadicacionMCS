@@ -16,4 +16,4 @@
 
 !./ignoredfolder/
 ./ignoredfolder/*
-!./ignoredfolder/not/*
+!./ignoredfolder/not/
