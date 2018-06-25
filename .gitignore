@@ -16,4 +16,4 @@
 
 !/ignor2/
 /ignor2/**
-!/ignor2/noinc/
+!/ignor2/noinc/**
