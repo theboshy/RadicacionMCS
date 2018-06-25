@@ -16,4 +16,4 @@
 
 !./ignoredfolder/
 ./ignoredfolder/*
-!./ignoredfolder/notigno/*
+!./ignoredfolder/not/*
