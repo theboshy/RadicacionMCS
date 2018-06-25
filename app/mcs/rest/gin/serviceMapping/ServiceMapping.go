@@ -6,7 +6,7 @@ import (
 	//"github.com/appleboy/gin-jwt"
 )
 
-func MapRouterGroup(router gin.Engine/*,authmidleware *jwt.GinJWTMiddleware*/) {
+func MapRouterGroup(router gin.Engine /*,authmidleware *jwt.GinJWTMiddleware*/) {
 	/* oauth interno - router.POST("/login",authmidleware.LoginHandler)
 	router.Use(authmidleware.MiddlewareFunc())*/
 
