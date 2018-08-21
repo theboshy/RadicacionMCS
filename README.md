@@ -12,16 +12,16 @@ Ejecucion  (o cambios agregados) agregados al protobuf
 
 ## Librerias utilizadas 
 
-* [golang.org/x/net/context] (golang.org/x/net/context)
-* [google.golang.org/grpc] (google.golang.org/grpc) 
-* [google.golang.org/grpc/reflection] (google.golang.org/grpc/reflection)
-* [github.com/gin-gonic/gin] (github.com/gin-gonic/gin)
-* [github.com/gin-contrib/cors] (github.com/gin-contrib/cors)
-* [github.com/gorilla/mux] (github.com/gorilla/mux)
-* [github.com/gorilla/handlers] (github.com/gorilla/handlers)
-* [github.com/go-xorm/core] (github.com/go-xorm/core)
-* [github.com/go-xorm/xorm] (github.com/go-xorm/xorm)
-* [github.com/go-sql-driver/mysql] (github.com/go-sql-driver/mysql)
+* [golang.org/x/net/context](golang.org/x/net/context)
+* [google.golang.org/grpc](google.golang.org/grpc) 
+* [google.golang.org/grpc/reflection](google.golang.org/grpc/reflection)
+* [github.com/gin-gonic/gin](github.com/gin-gonic/gin)
+* [github.com/gin-contrib/cors](github.com/gin-contrib/cors)
+* [github.com/gorilla/mux](github.com/gorilla/mux)
+* [github.com/gorilla/handlers](github.com/gorilla/handlers)
+* [github.com/go-xorm/core](github.com/go-xorm/core)
+* [github.com/go-xorm/xorm](github.com/go-xorm/xorm)
+* [github.com/go-sql-driver/mysql](github.com/go-sql-driver/mysql)
 
 ## Instalacion 
 
